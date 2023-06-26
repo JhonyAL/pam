@@ -1,34 +1,74 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Home } from './src/Home'
-import { About } from './src/About'
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Entypo, AntDesign, FontAwesome } from 'react-native-vector-icons'
 import { NavigationContainer } from '@react-navigation/native';
 
-import 'react-native-gesture-handler';
+// *********** IMPORTANDO TELAS ************
+import Tela1 from './components/Tela1.js'
+import Tela2 from './components/Tela2.js'
+import Tela3 from './components/Tela3.js'
 
-const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-      <NavigationContainer >
-        <Drawer.Navigator screenOptions={{
-          drawerStyle: {
-            backgroundColor: '#0f0f0f',
-          },
-        }}>
-          <Drawer.Screen name="Home" component={Home} />
-          <Drawer.Screen name="About" component={About} />
-        </Drawer.Navigator> 
-      </NavigationContainer>
-    )
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: "#c4461c",
+          tabBarActiveBackgroundColor: "#fff",
+          tabBarInactiveBackgroundColor: "#eecb00",
+          tabBarInactiveTintColor: "#222"
+        }}
+      >
+        <Tab.Screen
+          name="Ínicio" 
+          component={Tela1}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Entypo name="home" color={color} size={size} />
+            ),
+            headerStyle: {
+              backgroundColor: '#eecb00',
+            },
+            headerTintColor: '#222',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Sobre" 
+          component={Tela2} 
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <AntDesign name="questioncircleo" color={color} size={size} />
+            ),
+            headerStyle: {
+              backgroundColor: '#eecb00',
+            },
+            headerTintColor: '#222',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Tab.Screen 
+          name="Vitórias" 
+          component={Tela3} 
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <FontAwesome name="trophy" color={color} size={size} />
+            ),
+            headerStyle: {
+              backgroundColor: '#eecb00',
+            },
+            headerTintColor: '#222',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
